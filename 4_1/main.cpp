@@ -7,7 +7,7 @@
 using namespace std;
 Ticker servo_ticker;
 PwmOut pin5(D5), pin6(D6);
-BufferedSerial xbee(D1, D0);
+BufferedSerial xbee(D10, D9);
 BBCar car(pin5, pin6, servo_ticker);
 
 float d1 = 0;
@@ -35,6 +35,7 @@ int main() {
          if(recv == '\n') {
             printf("\r\n");
             dir = buf[i-1]; 
+            printf("enter: %f, %f, %c\n", d1, d2, dir);
             move();
             break;
          }else if (recv==' '){
@@ -54,7 +55,6 @@ int main() {
          buf[i] = fputc(recv, devout);
          printf("buf %s", buf);
       }
-      printf("enter: %f, %f, %c\n", d1, d2, dir);
    }
 
 }
